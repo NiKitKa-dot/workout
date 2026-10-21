@@ -1,0 +1,42 @@
+# Артефакты сборки (qmake / Qt)
+build/
+build-*/
+*-build/
+*.pro.user
+*.pro.user-*
+Makefile
+Makefile.*
+.qmake.stash
+*.o
+*.obj
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.debug
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Qt Creator
+.qtc_package_export/
+*.qbs.cache
+*.qbs.fds
+
+# Android
+.gradle/
+android-build/
+android-apk-build/
+*.apk
+*.aab
+
+# iOS
+ios-build/
+DerivedData/
+*.xcworkspace/xcuserdata/
+
+# Системные
+.DS_Store
+Thumbs.db
