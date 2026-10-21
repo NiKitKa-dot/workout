@@ -1,29 +1,41 @@
-QT       += core gui
+# ---------------------------------------------------------------
+# workout.pro — сборочный файл qmake для проекта «Дневник тренировок»
+# Открывается в Qt Creator: Файл -> Открыть проект или файл...
+# Кроссплатформенность: Desktop (Win/Linux/macOS) + Android/iOS
+# ---------------------------------------------------------------
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core gui widgets
 
-CONFIG += c++17
+# Qt5 по умолчанию; при Qt6-сборке достаточно поменять на c++17 и убрать лишнее
+CONFIG += c++14
 
-# You can make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+TARGET = workout
+TEMPLATE = app
+
+DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    src/main.cpp \
+    src/mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    src/mainwindow.h
 
 FORMS += \
-    mainwindow.ui
+    src/mainwindow.ui
 
-TRANSLATIONS += \
-    workout_ru_RU.ts
-CONFIG += lrelease
-CONFIG += embed_translations
+# -------------------------------------------------------------------
+# Настройки под мобильные платформы (qmake умеет их автоматически)
+# -------------------------------------------------------------------
+android {
+    # AndroidManifest.xml создаётся qmake автоматически, если файла нет.
+    # Минимальная версия Android и права — при необходимости добавим позже.
+}
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+ios {
+    QMAKE_TARGET_BUNDLE_PREFIX = com.workout.diary
+    QMAKE_BUNDLE = workout
+}
+
+# Сборка всех артефактов в отдельную папку не требуется — qmake сам
+# кладёт их в build-директорию, выбранную в Qt Creator.
